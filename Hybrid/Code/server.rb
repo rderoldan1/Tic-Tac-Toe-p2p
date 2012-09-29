@@ -30,8 +30,9 @@ class Server
     if @match.count.eql? 1
       @match[1] = user
       user.log("The match is going to begin",0)
-      @match[0].set_opponent(user)
-      user.set_opponent(@match[0])
+      user.set_opponent(@match[0],2,1)
+      @match[0].set_opponent(user,1,1)
+
     else
       @match[0] = user
       user.log("Waiting for the opponent",0)
