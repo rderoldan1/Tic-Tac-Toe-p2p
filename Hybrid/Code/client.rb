@@ -65,6 +65,7 @@ class Client
   end
 
   def print_board(board)
+    @board = board
     puts "\n
                |          |
                |          |
