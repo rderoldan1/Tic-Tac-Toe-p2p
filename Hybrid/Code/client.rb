@@ -48,14 +48,16 @@ class Client
          puts "escriba el movimiento"
          movement =  $stdin.gets.chomp
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
-         @opponent.juego(2,move+1)
          @opponent.print_board(@board)
+         @opponent.juego(2,move+1)
+
        elsif turn.eql? 2 and @num_player.eql? 2
          puts "escriba el movimiento"
          movement =  $stdin.gets.chomp
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
-         @opponent.juego(1,move+1)
          @opponent.print_board(@board)
+         @opponent.juego(1,move+1)
+
        end
      end
   end
