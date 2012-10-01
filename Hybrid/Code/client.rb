@@ -35,18 +35,23 @@ class Client
 
     @opponent.log("Hello I'm #{@player}",1)
     @opponent.log("neeeeaaa",1)
-    juego(turn)
+    juego(turn,0)
   end
 
-  def juego(turn)
-      if turn.eql? 1 and @num_player.eql? 1
-       @opponent.log("yo soy #{@player} el jugador #{@num_player}",1)
-       @opponent.juego(2)
-     elsif turn.eql? 2 and @num_player.eql? 2
-       @opponent.log("yo soy #{@player} el jugador #{@num_player}",1)
-       @opponent.juego(1)
+  def juego(turn,move)
+     if move < 9
+       if turn.eql? 1 and @num_player.eql? 1
+         puts "escriba el movimiento"
+         movement =  $stdin.gets.chomp
+         @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
+         @opponent.juego(2,move+1)
+       elsif turn.eql? 2 and @num_player.eql? 2
+         puts "escriba el movimiento"
+         movement =  $stdin.gets.chomp
+         @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
+         @opponent.juego(1,move+1)
+       end
      end
-
   end
 
   def mensaje(mess)
