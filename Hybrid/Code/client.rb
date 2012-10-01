@@ -7,7 +7,11 @@ class Client
     DRb.start_service("druby://localhost:0")
     @server, @player = server, player
     log("Login on server at #{server}",1)
-
+    @board = [
+        ["_","_","_"],
+        ["_","_","_"],
+        ["_","_","_"]
+    ]
   end
 
   def run
@@ -45,13 +49,32 @@ class Client
          movement =  $stdin.gets.chomp
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
          @opponent.juego(2,move+1)
+         @opponent.print_board(@board)
        elsif turn.eql? 2 and @num_player.eql? 2
          puts "escriba el movimiento"
          movement =  $stdin.gets.chomp
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
          @opponent.juego(1,move+1)
+         @opponent.print_board(@board)
        end
      end
+  end
+
+  def print_board(board)
+    puts "\n
+               |          |
+               |          |
+          #{board[0][0]}    |    #{board[0][1]}     |    #{board[0][2]}
+     __________|__________|__________
+               |          |
+          #{board[1][0]}    |    #{board[1][1]}     |    #{board[1][2]}
+               |          |
+     __________|__________|__________
+               |          |
+          #{board[2][0]}    |    #{board[2][1]}     |    #{board[2][2]}
+               |          |
+               |          |"
+
   end
 
   def mensaje(mess)
