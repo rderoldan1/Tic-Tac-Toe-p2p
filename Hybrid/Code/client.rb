@@ -48,6 +48,7 @@ class Client
          puts "escriba el movimiento"
          movement =  $stdin.gets.chomp
          position(movement,@num_player)
+         print_board(@board)
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
          @opponent.print_board(@board)
          @opponent.juego(2,move+1)
@@ -56,6 +57,7 @@ class Client
          puts "escriba el movimiento"
          movement =  $stdin.gets.chomp
          position(movement,@num_player)
+         print_board(@board)
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
          @opponent.print_board(@board)
          @opponent.juego(1,move+1)
