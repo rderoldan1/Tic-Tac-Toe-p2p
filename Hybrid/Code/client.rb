@@ -47,6 +47,7 @@ class Client
        if turn.eql? 1 and @num_player.eql? 1
          puts "escriba el movimiento"
          movement =  $stdin.gets.chomp
+         position(movement,@num_player)
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
          @opponent.print_board(@board)
          @opponent.juego(2,move+1)
@@ -54,6 +55,7 @@ class Client
        elsif turn.eql? 2 and @num_player.eql? 2
          puts "escriba el movimiento"
          movement =  $stdin.gets.chomp
+         position(movement,@num_player)
          @opponent.log("el oponente escribio #{movement}, jugada numero #{move}",1)
          @opponent.print_board(@board)
          @opponent.juego(1,move+1)
@@ -77,6 +79,67 @@ class Client
                |          |
                |          |"
 
+  end
+
+  def position(move, player)
+    letter = "X"
+    exit_code = 0
+    if player.eql? 2
+      letter = "O"
+    end
+
+    p = case move
+          when "1"
+            [0,0]
+          when "2"
+            [0,1]
+          when "3"
+            [0,2]
+          when "4"
+            [1,0]
+          when "5"
+            [1,1]
+          when "6"
+            [1,2]
+          when "7"
+            [2,0]
+          when "8"
+            [2,1]
+          when "9"
+            [2,2]
+          else
+            exit_code = 1
+        end
+    if @board[p[0]][p[1]].eql? "_"
+      @board[p[0]][p[1]] = letter
+      #exit_code = check_winner(letter, player)
+    else
+      exit_code = 2
+    end
+    exit_code
+  end
+
+  def check_winner(letter, player)
+    code = 0
+    if @board[0][0] == @board[0][1] and @board[0][1] == @board[0][2] and @board[0][2] == letter
+      code = 3
+    elsif @board[1][0] == @board[1][1] and @board[1][1] == @board[1][2] and @board[1][2] == letter
+      code = 3
+    elsif @board[2][0] == @board[2][1] and @board[2][1] == @board[2][2] and @board[2][2] == letter
+      code = 3
+    elsif @board[0][0] == @board[1][0] and @board[1][0] == @board[2][0] and @board[2][0] == letter
+      code = 3
+    elsif @board[0][1] == @board[1][1] and @board[1][1] == @board[2][1] and @board[2][1] == letter
+      code = 3
+    elsif @board[0][2] == @board[1][2] and @board[1][2] == @board[2][2] and @board[2][2] == letter
+      code = 3
+    elsif @board[0][0] == @board[1][1] and @board[1][1] == @board[2][2] and @board[2][2] == letter
+      code = 3
+    elsif @board[0][2] == @board[1][1] and @board[1][1] == @board[2][0] and @board[2][0] == letter
+      code = 3
+    else
+      puts "No winner yet."
+    end
   end
 
   def mensaje(mess)
